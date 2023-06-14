@@ -2,15 +2,26 @@
 #include <math.h>
 
 int main(){
-    float resp, n , x, prec;
+    float resp, x, prec, cima, lado;
+    int n;
 
-    n = 2; x = 0.89;
+    n = 0;
+    x = 0.89;
+    prec = 0.001;
+    cima = -1.0;
+    lado = x;
 
-    do{
-        resp = (pow(-1,n)/n+1)*pow(x,n+1);
-        x = resp
+    for(int a = 0;a<=5;a++){
+        //for(int i = a;i>1;i--){
+            cima = pow(cima,a);
+            lado = pow(lado,(a+1));
+        //}
+        resp = (cima/(a+1))*lado;
+        printf("%f %f %f\n", cima, lado, resp);
+        x = resp;
     }
-    while((x * x < C - prec) || (x * x > C + prec));
+
+    printf("%f %f %f\n", cima, lado, resp);
     printf("%f\n", resp);
 
     return 0;
