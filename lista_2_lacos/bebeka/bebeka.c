@@ -5,7 +5,7 @@ int main(){
     int dist=0, posi = 10*2;
 
     //scanf("%c %d", &dir, &dist);
-    while ((scanf("%c %d", &dir, &dist)) != EOF){
+    while ((scanf(" %c %d", &dir, &dist)) != EOF){
         switch (dir){
         case 'd':
             for(int i=0;i<posi; i++){
