@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+
 int main(){
     long int x,y, resto, nao_primo = 0, mdc = 1, a=0, b=0, divisores=0, max=0, min=0, intervalo;
 
@@ -14,6 +15,9 @@ int main(){
                 //printf("%d é divisivel por %d.\n", num, i);
                 divisores++;
                 }
+            else if(num == i){
+                divisores++;
+            }
     } 
         if(max<divisores){
             min = max;
