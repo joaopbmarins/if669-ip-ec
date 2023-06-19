@@ -6,12 +6,13 @@ int main(){
 
     for(int i=1; i<=n_canais; i++){//laço para cada canal   i = canal
         scanf("%d %d", &f1 ,&f2);
-        f = 2;
-        while(! (num_recebido <= f2 && num_recebido >= f1)){//laço para checar se o número está entre o quais f1 e f2
+        f = 2;// o problema é no while q tá dando True quando num_recebido é menor q f1 e f2.
+        while( !(num_recebido <= f2 && num_recebido >= f1)){//laço para checar se o número está entre o quais f1 e f2
             f++;//incrementa f para saber em qual f2 foi achado o espaço
             ftemp = f1 + f2;//ajeita a ordem dos fs
             f1 = f2;
             f2 = ftemp;
+            //printf("%d %d\n",f1,f2);
         }
         if((f2 - num_recebido) > (num_recebido - f1)){ //distancia do f1 pro num/ menor
             if((num_recebido - f1)<=dist_fr && i!=1){
