@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 
 int main(){
     int num_recebido, n_canais, f1=0, f2=0, ftemp=0, f=2,fr, canal, dist_fr=0, soma=0, num_soma;
@@ -7,6 +9,8 @@ int main(){
     for(int i=1; i<=n_canais; i++){//laço para cada canal   i = canal
         scanf("%d %d", &f1 ,&f2);
         f = 2;// o problema é no while q tá dando True quando num_recebido é menor q f1 e f2.
+        if(num_recebido<f1)
+            goto selecao_canal;
         while( !(num_recebido <= f2 && num_recebido >= f1)){//laço para checar se o número está entre o quais f1 e f2
             f++;//incrementa f para saber em qual f2 foi achado o espaço
             ftemp = f1 + f2;//ajeita a ordem dos fs
@@ -14,34 +18,37 @@ int main(){
             f2 = ftemp;
             //printf("%d %d\n",f1,f2);
         }
-        if((f2 - num_recebido) > (num_recebido - f1)){ //distancia do f1 pro num/ menor
-            if((num_recebido - f1)<=dist_fr && i!=1){
-                dist_fr = (num_recebido - f1);//define dist_fr como a menor distancia entre f1 e f2 para o num
+        selecao_canal:
+        //printf("%d\n",abs(f2 - num_recebido));
+        //printf("%d\n",abs(num_recebido - f1));
+        if( abs(f2 - num_recebido) > abs(num_recebido - f1)){ //distancia do f1 pro num/ menor
+            if(abs(num_recebido - f1)<=dist_fr && i!=1){
+                dist_fr = abs(num_recebido - f1);//define dist_fr como a menor distancia entre f1 e f2 para o num
                 canal = i;
                 fr = f-1;
                 num_soma = f1;
             }
             else if(i==1){
-                dist_fr = (num_recebido - f1);
+                dist_fr = abs(num_recebido - f1);
                 canal = i;
                 num_soma = f1;
                 fr = f-1;}
         }
-        else if((f2 - num_recebido) < (num_recebido - f1)){//distancia do f2 pro num/ menor
-            if((f2 - num_recebido)<=dist_fr && i!=1){
-                dist_fr = f2 - num_recebido;//define dist_fr como a menor distancia entre f1 e f2 para o num
+        else if(abs(f2 - num_recebido) < abs(num_recebido - f1)){//distancia do f2 pro num/ menor
+            if(abs(f2 - num_recebido)<=dist_fr && i!=1){
+                dist_fr = abs(f2 - num_recebido);//define dist_fr como a menor distancia entre f1 e f2 para o num
                 canal = i;
                 num_soma = f2;
                 fr = f;
             }
             else if(i==1){
-                dist_fr = f2 - num_recebido;
+                dist_fr = abs(f2 - num_recebido);
                 canal = i;
                 num_soma = f2;
                 fr = f;}
         }
-        else if((f2 - num_recebido) == (num_recebido - f1)){
-            dist_fr = (num_recebido - f1);//define dist_fr como a menor distancia entre f1 e f2 para o num
+        else if(abs(f2 - num_recebido) == abs(num_recebido - f1)){
+            dist_fr = abs(num_recebido - f1);//define dist_fr como a menor distancia entre f1 e f2 para o num
             canal = i;
             num_soma = f1;
             fr = f-1;

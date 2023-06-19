@@ -4,8 +4,8 @@ int main(){
     int num, nao_primo = 0, i;
     scanf("%d", &num);
 
-    for(i = 2; i<num; i++){
-        if(num % i == 0){
+    for(i = 1; i<num; i++){
+        if(num % i == 0 && i !=1){
             nao_primo = 1;
             printf("%d é divisivel por %d.\n", num, i);
         }
