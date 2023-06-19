@@ -7,7 +7,6 @@ int main(){
     for(int i=0; i<n_canais; i++){//laço para cada canal 
         scanf("%d %d", &f1 ,&f2);
         while(! (num_recebido <= f2 && num_recebido >= f1)){//laço para checar se o número está entre o quais f1 e f2
-            printf("%d %d %d\n", f1, f2, ftemp);
             ftemp = f1 + f2;
             f1 = f2;
             f2 = ftemp;
