@@ -5,7 +5,9 @@ int main(){
     long int x,y, resto, nao_primo = 0, mdc = 1, a=0, b=0, divisores=0, max=0, min=0, intervalo;
 
     scanf("%ld %ld", &x, &y);
+
     resto = x % y;
+    
     intervalo = (y>x)?y:x;
 
     for(int num = 0; num<=intervalo; num++){//calcula a e b
