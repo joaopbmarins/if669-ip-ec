@@ -58,9 +58,9 @@ int main(){
     //printf("\ncanal: %d minuto: %d\n", canal, fr);
 
     while(num_soma>0){
-        int algoritmo;
-        algoritmo = num_soma % 10;
-        soma += algoritmo;
+        int algorismo;
+        algorismo = num_soma % 10;
+        soma += algorismo;
         num_soma = num_soma/10;
         
     }

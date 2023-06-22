@@ -14,7 +14,7 @@ int main()
         while(num>1 && p_divisores != -1){
         p_calculado = 0;
         p_divisores = 0;
-        for(k = 2; k<=num;k++){
+        for(k = 2; k<=num && p_divisores != -1;k++){
             if(k == 2)
                 primo = 1;
             for(j = 2; j<k; j++){
