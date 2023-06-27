@@ -18,12 +18,19 @@ int main(){
         for(int j=0;j<largura;j++){
             if(parede[i][j] == 'o' && parede[i+1][j] != '#'){
                 if(i != (altura-1))
-                parede[i+1][j] = 'o';
+                    parede[i+1][j] = 'o';
             }
             else if(parede[i][j] == 'o' && parede [i+1][j] == '#'){
                 for(int k=0;k<largura;k++){
                     if(parede[i+1][k] == '#' && parede[i+1][k-1] == '#' && parede[i+1][k+1] == '#'){
                         parede[i][k] = 'o';
+                    }
+                    else if(parede[i+1][k] == '#' && parede[i+1][k+1] != '#' && parede[i+1][k-1] != '#'){
+                        parede[i][k] = 'o';
+                        if(k != (largura-1))
+                            parede[i][k+1] = 'o';
+                        if(k !=0)
+                            parede[i][k-1] = 'o';
                     }   
                     else if(parede[i+1][k] == '#' && (parede[i+1][k-1] != '#')){
                         parede[i][k] = 'o';
@@ -33,7 +40,7 @@ int main(){
                     else if(parede[i+1][k] == '#' && (parede[i+1][k+1] != '#')){
                         parede[i][k] = 'o';
                         if(k != (largura-1))
-                         parede[i][k+1] = 'o';
+                            parede[i][k+1] = 'o';
                     }
                 }
             }
