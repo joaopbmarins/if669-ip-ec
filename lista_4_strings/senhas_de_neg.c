@@ -1,17 +1,17 @@
 #include <stdio.h>
 #include <string.h>
-#define TAM_senha 100
+#define TAM_senha 200
 
 int main(){
     char senha[TAM_senha] = {};
-    char senha_final[TAM_senha] = {};
+    char senha_final[1000] = {};
     int qtd_senhas, qtd_senha_final =0,valido = 1, i,j;
 
     scanf("%d", &qtd_senhas);
     for(i=0;i<qtd_senhas;i++){// i é qual senha estamos
        scanf(" %99[^\n]", senha);
 
-        for(j=0;senha[j] != '\0';j++){// j é qual char estamos
+        for(j=0;senha[j] != '\0' && j<TAM_senha;j++){// j é qual char estamos
             if((senha[j] >= 'A' && senha[j] <= 'Z') || (senha[j] >= '0' && senha[j] <= '9')){
                 if(senha[j] == '0')
                     senha[j] = '6';
