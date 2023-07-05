@@ -50,7 +50,7 @@ int main(){
                 valido = 0;
             }
         }
-        qtd_senha_final += strlen(senha);
+        qtd_senha_final +=  (senha);
         strcat(senha_final, "-");
         strcat(senha_final, senha);
     }
