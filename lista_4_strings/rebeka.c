@@ -1,11 +1,12 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 int main(){
     char frase[1001],letras[1001],num[1001];
-    int qtd_letra[27], aux[27];
-    char combinando[4], combinados[125][4];
-    int index=0,index1=0,index_a=0,index_b=0,nao_serve=0;
+    int qtd_letra[27], aux[27], nao_serve=0;
+    char combinando[4], combinados[52728][4];
+    long int index=0,index1=0,index_a=0,index_b=0, soma=0;
 
     for(int i=0;i<26;i++) {qtd_letra[i] = 0;}
 
@@ -23,12 +24,18 @@ int main(){
                 index1++;
             }
         }
+        letras[index+1] = '\0';
+        num[index1+1] = '\0';
+        soma += atol(num);
+        for(int i=0;i<index1;i++){
+            num[i] = '\0';
+        }
+        index1 = 0;
+        
     }
-    letras[index+1] = '\0';
-    num[index1+1] = '\0';
     //printf("%s\n", letras);
-    //printf("%s\n", num);
 
+    
     for(int i=0;i<27;i++){
         aux[i] = qtd_letra[i];
     }
@@ -73,6 +80,7 @@ int main(){
         }
         //printf("\n");
     }
+    //organizando o anagrama
     char aux1[4];
     for(int i=0;i<index_a;i++){
         for(int j=0;j<index_a-1-i;j++){
@@ -82,11 +90,13 @@ int main(){
                 strcpy(combinados[j+1],aux1);
             }
         }
-    }
+    }// fim anagrama
+
+    
     
     for(int i=0;i<index_a;i++) printf("%s",combinados[i]);
-    
-    
+    printf("\n");
+    printf("Rebeka agora esta livre! A senha da cela eh %ld\n", soma);
 
     return 0;
 }
