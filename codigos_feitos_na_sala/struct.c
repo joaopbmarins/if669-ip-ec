@@ -9,7 +9,7 @@ typedef struct  {
         String nome;
         int idade;
         float altura;
-       char sexo;
+        char sexo;
     } Pessoa;
 
 
