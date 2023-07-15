@@ -5,51 +5,79 @@ typedef struct {
     char nome[20];
     int estado; //0 ou 1 sendo 1 emprestado e 0 não emprestado
     char estrelinhas[6];
-    int artista;
+    char artista[20];
 } Album;
 
 typedef struct {
     char nome[20];
     int qtd_album;
-    Album album[100];
 } Artista;
 
 int main(){
-    int n, cd1, cd2, cd3;
+    int n, j=0, indices_album=0;
     scanf("%d", &n);
-    int posi_album[(n*100)];
     Artista artistas[n];
+    Album album[1000];
 
     for(int i=0;i<n;i++){
         scanf(" %19[^\n]",artistas[i].nome);
         scanf("%d", &artistas[i].qtd_album);
 
-        for(int j=0;j<artistas[i].qtd_album;j++){
-            scanf(" %s", artistas[i].album[j].nome);
-            scanf("%d", &artistas[i].album[j].estado);
-            scanf(" %s", artistas[i].album[j].estrelinhas);
-            posi_album[j] = i;
+        indices_album += artistas[i].qtd_album;
+
+        for(;j<indices_album;j++){
+            scanf(" %s", album[j].nome);
+            scanf("%d", &album[j].estado);
+            scanf(" %s", album[j].estrelinhas);
+            strcpy(album[j].artista,artistas[i].nome);
         }
-        Album aux;
-        for(int j=0;j<artistas[i].qtd_album;j++){
-            for(int k=0;k<artistas[i].qtd_album-j-1;k++){
-                if(strlen(artistas[i].album[k].estrelinhas) < strlen(artistas[i].album[k+1].estrelinhas)){
-                    aux = artistas[i].album[k];
-                    artistas[i].album[k] = artistas[i].album[k+1];
-                    artistas[i].album[k+1] = aux;
-                }
+    }
+    Artista aux;
+    
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n-i-1;j++){
+            //printf("%d\n",strcmp(artistas[j].nome,artistas[j+1].nome));
+            if(strcmp(artistas[j].nome,artistas[j+1].nome) > 0){
+                aux = artistas[j];
+                artistas[j] = artistas[j+1];
+                artistas[j+1] = aux;
             }
         }
     }
-    int cd[3];
-    scanf("%d %d %d", &cd[0], &cd[1], &cd[2]);// 2 4 7 
+    Album aux1;
+    for(int i=0;i<indices_album;i++){
+        for(int j=0;j<indices_album-i-1;j++){
+            //printf("%d\n",strcmp(artistas[j].nome,artistas[j+1].nome));
+            if(strcmp(album[j].artista,album[j+1].artista) > 0){
+                aux1 = album[j];
+                album[j] = album[j+1];
+                album[j+1] = aux1;
+            }
+        }
+    }
+    int cd;
+    Album cds[3];
+    for(int i=0;i<3;i++){
+        scanf("%d", &cd);
+        cds[i] = album[cd-1];
+    }
+    for(int i=0;i<3;i++){
+        for(int j=0;j<3-i-1;j++){
+            //printf("%d\n",strcmp(artistas[j].nome,artistas[j+1].nome));
+            if(strlen(cds[j].estrelinhas) < strlen(cds[j+1].estrelinhas) ){
+                aux1 = cds[j];
+                cds[j] = cds[j+1];
+                cds[j+1] = aux1;
+            }
+        }
+    }
 
-    //esperar ver se os indices na questão está correto
-    
-    
+    for(int i=0;i<3;i++){
+        if(cds[i].estado == 0)
+            printf("%s - %s\n",cds[i].artista,cds[i].nome);
+        else
+            printf("Infelizmente %s ta emprestado:(\n",cds[i].nome);
+    }
 
     return 0;
 }
-
-//printf("%s - %s\n",,);
-//printf("Infelizmente %s tá emprestado:(\n",);
