@@ -12,8 +12,6 @@ typedef struct  {
         char sexo;
     } Pessoa;
 
-
-
 int main(){
 
     Pessoa daniel, alexandre;
