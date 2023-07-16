@@ -172,17 +172,17 @@ int main(){
             strcpy(vips[i].nome, voto[i].nome);
         }
         else{
-            strcpy(vips[i].nome, "\0");
+            vips[i].nome[0] = '\0';
         }
     }
-    //ordena os vips pelo nome e imprime eles no final
-    Vip aux2;
+//ordena os vips pelo nome e imprime eles no final
+    Vip aux1;
     for(int i=0;i<n;i++){
         for(int j=0;j<n-i-1;j++){
             if(strcmp(vips[j].nome,vips[j+1].nome) > 0){
-                aux2 = vips[j];
+                aux1 = vips[j];
                 vips[j] = vips[j+1];
-                vips[j+1] = aux2;
+                vips[j+1] = aux1;
             }
         }
     }
