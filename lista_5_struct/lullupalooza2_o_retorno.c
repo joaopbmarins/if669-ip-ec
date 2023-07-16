@@ -33,7 +33,7 @@ int main(){
     strcpy(bebida[0].nome, "agua");strcpy(bebida[1].nome, "cafe");strcpy(bebida[2].nome, "suco");strcpy(bebida[3].nome, "monster");strcpy(bebida[4].nome, "pitu");
     strcpy(comida[0].nome, "coxinha");strcpy(comida[1].nome, "brigadeiro");strcpy(comida[2].nome, "risoto");strcpy(comida[3].nome, "picanha");strcpy(comida[4].nome, "pizza");
     for(int i=0;i<5;i++){comida[i].qtd_votos = 0;bebida[i].qtd_votos = 0;artista[i].qtd_votos = 0;}
-    for(int i=0;i<n;i++){agregados[i].qtd_votos=0;}
+    for(int i=0;i<n;i++){agregados[i].qtd_votos=0;}//agregados[i].num=0;
 
     for(int i=0;i<n;i++){
         scanf(" %s %d %s %s %[^\n]",voto[i].nome ,&voto[i].agregados, voto[i].comida, voto[i].bebida, voto[i].artista);
@@ -50,8 +50,8 @@ int main(){
         }
         else{
             agregados[i].nome[0] = '\0';
-            agregados[i].qtd_votos = -1;
-            agregados[i].num = -1;
+            agregados[i].qtd_votos = 0;
+            agregados[i].num = 0;
         }
         for(int j=0;j<5;j++){
             if(strcmp(comida[j].nome,voto[i].comida)==0){
