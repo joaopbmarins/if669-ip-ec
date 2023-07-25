@@ -23,6 +23,8 @@ Lista ** new(Lista **lista, int *tam){
 
     lista[*tam] = (Lista *) malloc(sizeof(lista));
     scanf("%d %d %d", &(lista[*tam]->id_produto), &(lista[*tam]->qtd), &(lista[*tam]->preco));
+    *(tam) += 1;
+    
     for(int i=0;i<*tam;i++){
         for(int j=0;j<*tam-i-1;j++){
             Lista aux1;
@@ -33,13 +35,11 @@ Lista ** new(Lista **lista, int *tam){
             }
         }
     }
-    //printf("%d %d %d %d\n", lista[*tam]->id_produto, lista[*tam]->qtd, lista[*tam]->preco, *tam);
-    *(tam) += 1;
+
     return lista;
 }
 Lista ** rm(Lista **lista, int *tam){
     Lista **aux;
-    
     int id_deletado, posi;
     scanf("%d", &id_deletado);
 
