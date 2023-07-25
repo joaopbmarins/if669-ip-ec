@@ -40,7 +40,7 @@ Lista ** new(Lista **lista, int *tam){
 }
 Lista ** rm(Lista **lista, int *tam){
     Lista **aux;
-    int id_deletado, posi;
+    int id_deletado;
     scanf("%d", &id_deletado);
 
     for(int i=0;i<*tam;i++){
@@ -58,7 +58,7 @@ Lista ** rm(Lista **lista, int *tam){
     free(lista[*tam]);
     aux = lista;
     lista = (Lista **) realloc(lista, *(tam)*sizeof(Lista*));
-    if(lista == NULL){
+    if(lista == NULL){// caso realloc retorne null
         printf("Problema de alocacao\n"); 
         for(int i=0;i<*tam;i++)
             free(aux[i]);
