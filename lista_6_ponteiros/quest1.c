@@ -1,5 +1,12 @@
 #include <stdio.h>
 
+/*
+João Pedro Barbosa Marins
+jpbm 
+Lista Ponteiros
+Questão 1
+*/
+
 int main(){
     char c = 'a';
     char *pc = &c;
@@ -13,8 +20,8 @@ int main(){
     printf("d)\n");
     printf("\tendereço do valor guardado no endereço apontado por pc: %p\n\tvalor guardado no endereço de pc: %p\n",&*pc, *&pc);
     //explicacao
-    printf("\n\tR= Quando vc acessa o endereço de pc vc recebe o valor guardado nele logo o endereço da variavel armazenada.\n");
-    printf("\tE quando vc acessa pc para alcancar a variavel armazenada nele e pede o endereço dela vc recebe o endereço da variavel que tbm é o endereço armazenado em pc.\n");    
+    printf("\n\tR= Quando voce acessa o endereço de pc voce recebe o valor guardado nele logo o endereço da variavel armazenada.\n");
+    printf("\tE quando voce acessa pc para alcancar a variavel armazenada nele e pede o endereço dela voce recebe o endereço da variavel que tambem é o endereço armazenado em pc.\n");    
 
     return 0;
 }

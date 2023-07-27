@@ -70,11 +70,12 @@ Lista **removergrupo(Lista **lista, int *tam){
     Lista **aux;
     float preco_deletado;
     scanf("%f", &preco_deletado);
+    printf("%f\n", lista[2]->preco);
     
     for(int i=0;i<*tam;i++){
         for(int j=0;j<*tam-i-1;j++){
             Lista aux1;
-            if(lista[j]->preco == preco_deletado){
+            if(lista[j]->preco > preco_deletado){
                 aux1 = *(lista[j]);
                 *(lista[j]) = *(lista[j+1]);
                 *(lista[j+1]) = aux1;
@@ -84,7 +85,7 @@ Lista **removergrupo(Lista **lista, int *tam){
 
     int qtd_deletado;
     for(int i=0;i<*tam;i++){
-        if(lista[i]->preco == preco_deletado){
+        if(lista[i]->preco > preco_deletado){
             qtd_deletado++;
         }
     }

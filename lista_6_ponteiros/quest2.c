@@ -1,5 +1,12 @@
 #include <stdio.h>
 
+/*
+João Pedro Barbosa Marins
+jpbm 
+Lista Ponteiros
+Questão 2
+*/
+
 int main(){
     int vet[5] = {1,2,3,4,5};
     int *p = vet;

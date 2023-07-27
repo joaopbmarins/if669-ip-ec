@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include <string.h>
 
+/*
+João Pedro Barbosa Marins
+jpbm 
+Lista Ponteiros
+Questão 3
+*/
+
 int main(){
     char str[50];     // String
     char str_inv[50]; // String invertida
