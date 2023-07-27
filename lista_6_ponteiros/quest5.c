@@ -84,7 +84,7 @@ int main(){
         }
         else if(strcmp(comando,"END")==0){
             for(int i=0;i<tam;i++)
-                printf("%d %d %d\n", lista[i]->id_produto, lista[i]->qtd, lista[i]->preco);
+                printf("%d %d %d\n", lista[i]->id_produto, lista[i]->preco, lista[i]->qtd);
             break;
         }
     }
