@@ -8,126 +8,114 @@ typedef struct{
     char nome[50];
 }Lista;
 
-Lista **inserir(Lista **lista, int *tam){
-    Lista **aux;
-    aux = lista;
-    lista = (Lista **) realloc(lista, (*(tam)+1)*sizeof(Lista*));
-
-    if(lista == NULL){// caso realloc retorne null
-        printf("Problema de alocacao\n"); 
-        for(int i=0;i<*tam;i++)
-            free(aux[i]);
-        free(aux);
-        exit(1);
-    }
-
-    lista[*tam] = (Lista *) malloc(sizeof(lista));
-    scanf(" %s %f %d", (lista[*tam]->nome), &(lista[*tam]->preco), &(lista[*tam]->qtd));
-    *(tam) += 1;
-
-    return lista;
+void inserir(Lista **lista, int *tam){
+    *lista = (Lista *) realloc(*lista, (*tam+1) * sizeof(Lista));
+    scanf(" %s %f %d", (*lista)[*tam].nome, &(*lista)[*tam].preco, &(*lista)[*tam].qtd);
+    (*tam)++;
 }
 
-Lista **remover(Lista **lista, int *tam){
-    Lista **aux;
+void remover(Lista **lista, int *tam){
     char nome_deletado[50];
     int qtd_deletado;
     scanf(" %s %d", nome_deletado, &qtd_deletado);
 
     for(int i=0;i<*tam;i++){
         for(int j=0;j<*tam-i-1;j++){
-            Lista aux1;
-            if(strcmp(lista[j]->nome, nome_deletado)==0){
-                aux1 = *(lista[j]);
-                *(lista[j]) = *(lista[j+1]);
-                *(lista[j+1]) = aux1;
+            Lista aux;
+            if(strcmp((*lista)[j].nome, nome_deletado)==0){
+                aux = (*lista)[j];
+                (*lista)[j] = (*lista)[j+1];
+                (*lista)[j+1] = aux;
             }
         }
     }
 
-    if((lista[*(tam)-1]->qtd - qtd_deletado) <= 0){
-        *(tam) -= 1;
-        free(lista[*tam]);
-        aux = lista;
-        lista = (Lista **) realloc(lista, *(tam)*sizeof(Lista*));
-        if(lista == NULL){// caso realloc retorne null
-            printf("Problema de alocacao\n"); 
-            for(int i=0;i<*tam;i++)
-                free(aux[i]);
-            free(aux);
-            exit(1);
-        }
+    if( ((*lista)[*tam-1].qtd - qtd_deletado) <= 0){
+        (*tam)--;
+        *lista = (Lista *) realloc(*lista, *tam *sizeof(Lista));
     }
     else{
-        lista[*(tam)-1]->qtd -= qtd_deletado;
+        (*lista)[*tam-1].qtd -= qtd_deletado;
     }
-    
-    
-    return lista;
 }
 
-Lista **removergrupo(Lista **lista, int *tam){
-    Lista **aux;
+void removergrupo(Lista **lista, int *tam){
     float preco_deletado;
     scanf("%f", &preco_deletado);
-    printf("%f\n", lista[2]->preco);
     
     for(int i=0;i<*tam;i++){
         for(int j=0;j<*tam-i-1;j++){
-            Lista aux1;
-            if(lista[j]->preco > preco_deletado){
-                aux1 = *(lista[j]);
-                *(lista[j]) = *(lista[j+1]);
-                *(lista[j+1]) = aux1;
+            Lista aux;
+            if((*lista)[j].preco > (*lista)[j+1].preco){
+                aux = *(lista[j]);
+                (*lista)[j] = (*lista)[j+1];
+                (*lista)[j+1] = aux;
             }
         }
     }
 
-    int qtd_deletado;
+    int posi_deletado;
     for(int i=0;i<*tam;i++){
-        if(lista[i]->preco > preco_deletado){
-            qtd_deletado++;
+        if((*lista)[i].preco > preco_deletado){
+            posi_deletado = i;
+            i = *tam +1;
         }
     }
 
-    for(int i=0;i<qtd_deletado;i++){
-        *(tam) -= 1;
-        free(lista[*tam]);
-        aux = lista;
-        lista = (Lista **) realloc(lista,*(tam)*sizeof(Lista*));
-        if(lista == NULL){// caso realloc retorne null
-            printf("Problema de alocacao\n"); 
-            for(int i=0;i<*tam;i++)
-                free(aux[i]);
-            free(aux);
-            exit(1);
+    *tam -= (*tam-posi_deletado);
+
+    *lista = (Lista *) realloc(*lista, *tam * sizeof(Lista));
+}
+
+void consultar(Lista *lista, int tam){
+    float total=0;
+    for(int i=0;i<tam;i++){
+        total += (lista[i].preco * lista[i].qtd);
+    }
+    printf("\nAtualmente a lista esta em R$%.1f\n", total);
+}
+
+void procurar (Lista *lista, int tam){
+    char procurado[100];
+    int achou=0;
+    scanf(" %s", procurado);
+
+    for(int i=0;i<tam && achou==0;i++){
+        if(strcmp(lista[i].nome, procurado)==0){
+            achou = 1;
+            printf("\n%s\n", lista[i].nome);
+            printf("- %.1f\n", lista[i].preco);
+            printf("- %i\n", lista[i].qtd);
         }
     }
-
-    return lista;
+    if(achou == 0){
+        printf("\n%s nao foi encontrado.\n", procurado);
+    }
 }
 
 int main(){
-    char comando[50];
-    Lista **lista=NULL;
+    char comando[20];
+    Lista *lista=NULL;
     int tam=0;
     while(scanf(" %s", comando)!= EOF){
         if(strcmp(comando,"INSERIR")==0){
-            lista = inserir(lista, &tam);
+            inserir(&lista, &tam);
         }
         else if(strcmp(comando,"REMOVER")==0){
-            lista = remover(lista, &tam);
+            remover(&lista, &tam);
         }
         else if(strcmp(comando, "REMOVERGRUPO")==0){
-            lista = removergrupo(lista, &tam);
+            removergrupo(&lista, &tam);
         }
-        else if(strcmp(comando,"END")==0){
-            break;
+        else if(strcmp(comando,"CONSULTAR")==0){
+            consultar(lista, tam);
+        }
+        else if(strcmp(comando,"PROCURAR")==0){
+            procurar(lista, tam);
         }
     }
 
-    for(int i=0;i<tam;i++)
-        printf("%s %.2f %d\n", lista[i]->nome, lista[i]->preco, lista[i]->qtd);
-    
+    free(lista);
+
     return 0;
 }
