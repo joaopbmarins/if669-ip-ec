@@ -16,41 +16,31 @@ typedef struct{
 }Lista;
 
 int main(){
-    char comando[50];
-    Lista **lista=NULL;
+    char comando[20];
+    Lista *lista=NULL;
     int tam=0;
     while(scanf(" %s", comando)!= EOF){
-        Lista **aux;
+        Lista *aux;
         aux = lista;
         if(strcmp(comando,"NEW")==0){
-            lista = (Lista **) realloc(lista, ((tam)+1)*sizeof(Lista*));
+            lista = (Lista *) realloc(lista, (tam+1) * sizeof(Lista));
 
             if(lista == NULL){// caso realloc retorne null
                 printf("Problema de alocacao\n"); 
-                for(int i=0;i<tam;i++)
-                    free(aux[i]);
                 free(aux);
                 exit(1);
             }
 
-            lista[tam] = (Lista *) malloc(sizeof(lista));
-            if(lista == NULL){// caso malloc retorne null
-                printf("Problema de alocacao\n"); 
-                for(int i=0;i<tam;i++)
-                    free(aux[i]);
-                free(aux);
-                exit(1);
-            }
-            scanf("%d %d %d", &(lista[tam]->id_produto), &(lista[tam]->qtd), &(lista[tam]->preco));
+            scanf("%d %d %d", &(lista[tam].id_produto), &(lista[tam].qtd), &(lista[tam].preco));
             tam++;
             
             for(int i=0;i<tam;i++){
                 for(int j=0;j<tam-i-1;j++){
                     Lista aux1;
-                    if(lista[j]->id_produto > lista[j+1]->id_produto){
-                        aux1 = *(lista[j]);
-                        *(lista[j]) = *(lista[j+1]);
-                        *(lista[j+1]) = aux1;
+                    if(lista[j].id_produto > lista[j+1].id_produto){
+                        aux1 = lista[j];
+                        lista[j] = lista[j+1];
+                        lista[j+1] = aux1;
                     }
                 }
             }
@@ -62,36 +52,30 @@ int main(){
             for(int i=0;i<tam;i++){
                 for(int j=0;j<tam-i-1;j++){
                     Lista aux1;
-                    if(lista[j]->id_produto == id_deletado){
-                        aux1 = *(lista[j]);
-                        *(lista[j]) = *(lista[j+1]);
-                        *(lista[j+1]) = aux1;
+                    if(lista[j].id_produto == id_deletado){
+                        aux1 = lista[j];
+                        lista[j] = lista[j+1];
+                        lista[j+1] = aux1;
                     }
                 }
             }
             tam--;
-            free(lista[tam]);
 
             aux = lista;
-            lista = (Lista **) realloc(lista, (tam)*sizeof(Lista*));
+            lista = (Lista *) realloc(lista, tam *sizeof(Lista));
             if(lista == NULL){// caso realloc retorne null
                 printf("Problema de alocacao\n"); 
-                for(int i=0;i<tam;i++)
-                    free(aux[i]);
                 free(aux);
                 exit(1);
             }
         }
         else if(strcmp(comando,"END")==0){
             for(int i=0;i<tam;i++)
-                printf("%d %d %d\n", lista[i]->id_produto, lista[i]->preco, lista[i]->qtd);
+                printf("%d %d %d\n", lista[i].id_produto, lista[i].preco, lista[i].qtd);
             break;
         }
     }
 
-    for(int i=0;i<tam;i++) 
-        free(lista[i]);
     free(lista);
-    
     return 0;
 }
