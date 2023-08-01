@@ -31,18 +31,18 @@ int encontraColuna(int coluna, Coluna **col_lista, int tam_col){
 }
 
 Linha *preencheMatriz(int *qtdLinhas){
-    int linha, col, qtd_colunas;
+    int linha, col;
     float valor;
     Linha *Matriz=NULL;
     printf("Qual é a linha, a coluna e o valor respectivo na matriz? ");
     while(scanf("%d %d %f", &linha, &col, &valor) != EOF){
         if(encontraLinha(linha, &Matriz, *qtdLinhas) == -1){//não existe a linha ainda logo tbm nn existe coluna
-            qtd_colunas = 0;
+            int qtd_colunas = 0;
             Matriz = (Linha *) realloc(Matriz, (*qtdLinhas + 1) * sizeof(Linha));
             Matriz[*qtdLinhas].Linha = linha;
             Matriz[*qtdLinhas].qtdCols = qtd_colunas+1;
             Matriz[*qtdLinhas].p = (Coluna *) malloc((qtd_colunas+1) * sizeof(Coluna));
-            Matriz[*qtdLinhas].p[qtd_colunas].Coluna = qtd_colunas+1;
+            Matriz[*qtdLinhas].p[qtd_colunas].Coluna = col;
             Matriz[*qtdLinhas].p[qtd_colunas].Valor = valor;
 
             qtd_colunas++;
@@ -54,7 +54,7 @@ Linha *preencheMatriz(int *qtdLinhas){
                 Matriz[linha_matriz].p = (Coluna *) realloc(Matriz[linha_matriz].p, (Matriz[linha_matriz].qtdCols+1)* sizeof(Coluna));
                 Matriz[linha_matriz].p[Matriz[linha_matriz].qtdCols].Coluna = col;
                 Matriz[linha_matriz].p[Matriz[linha_matriz].qtdCols].Valor = valor;
-                Matriz[linha_matriz].qtdCols = Matriz[linha_matriz].qtdCols + 1;
+                Matriz[linha_matriz].qtdCols += 1;
             }
             else{//achou a coluna e a linha existe
                 int coluna_matriz = encontraColuna(col, &(Matriz[linha_matriz].p), (Matriz[linha_matriz].qtdCols));
@@ -70,50 +70,36 @@ Linha *preencheMatriz(int *qtdLinhas){
 
 void printMatriz(Linha *matriz, int qtd_linhas){
     int max_colunas=0, max_linha=0;
-    Linha aux;
-    Coluna aux1;
 
-    // for(int i=0;i<qtd_linhas;i++){
-    //     for(int j=0;j<qtd_linhas-i-1;j++){
-    //         if(matriz[j].Linha > matriz[j+1].Linha){
-    //             aux = matriz[j];
-    //             matriz[j] = matriz[j+1];
-    //             matriz[j+1] = aux;
-    //         }
-    //     }
-    // }
-
-    // for(int i=0;i<qtd_linhas;i++){
-    //     for(int j=0;matriz[i].qtdCols;j++){
-    //         for(int k=0;k<matriz[i].qtdCols-j-1;k++){
-    //             if(matriz[i].p[k].Coluna > matriz[i].p[k+1].Coluna){
-    //                 aux1 = matriz[i].p[k];
-    //                 matriz[i].p[k] = matriz[i].p[k+1];
-    //                 matriz[i].p[k+1] = aux1;
-    //             }
-    //         }
-    //     }
-    // }
-
-    for(int i=0;i<qtd_linhas;i++){//inicio da impressao
-        if(matriz[i].qtdCols > max_colunas){
-            max_colunas = matriz[i].qtdCols;
-        }
-        if(matriz[i].Linha > max_linha){
+    for(int i=0;i<qtd_linhas;i++){
+        if(matriz[i].Linha > max_linha){//acha o maximo de linhas
             max_linha = matriz[i].Linha;
+        }
+        for(int j=0;j<matriz[i].qtdCols;j++){
+            if(matriz[i].p[j].Coluna > max_colunas){//acha o maximo de colunas
+                max_colunas = matriz[i].p[j].Coluna;
+            }
         }
     }
     printf("\n");
 
-    for(int i=0;i<max_linha;i++){
-        if(encontraLinha(i, &matriz, qtd_linhas) != -1){
-            printf("%.1f", encontraLinha(i, &matriz, qtd_linhas));
+    for(int i=1;i<=max_linha;i++){
+        int a = encontraLinha(i, &matriz, qtd_linhas);
+        if(a != -1){//encontrei a linha
+            for(int j=1;j<=max_colunas;j++){
+                int b = encontraColuna(j, &(matriz[a].p), matriz[a].qtdCols);
+                if(b != -1){//encontrei a coluna
+                    printf("%.1f ",matriz[a].p[b].Valor);
+                }
+                else{//nao encontrei a coluna
+                    printf("0.0 ");
+                }
+            }
         }
-        else{
-            printf("0.0");
-        }
-        for(int j=0;j<max_colunas;j++){
-            
+        else{// nao encontrei a linha
+            for(int j=1;j<=max_colunas;j++){
+                printf("0.0 ");
+            }
         }
         printf("\n");
     }
