@@ -69,19 +69,51 @@ Linha *preencheMatriz(int *qtdLinhas){
 }
 
 void printMatriz(Linha *matriz, int qtd_linhas){
-    int max_colunas=0;
-    for(int i=0;i<qtd_linhas;i++){
+    int max_colunas=0, max_linha=0;
+    Linha aux;
+    Coluna aux1;
+
+    // for(int i=0;i<qtd_linhas;i++){
+    //     for(int j=0;j<qtd_linhas-i-1;j++){
+    //         if(matriz[j].Linha > matriz[j+1].Linha){
+    //             aux = matriz[j];
+    //             matriz[j] = matriz[j+1];
+    //             matriz[j+1] = aux;
+    //         }
+    //     }
+    // }
+
+    // for(int i=0;i<qtd_linhas;i++){
+    //     for(int j=0;matriz[i].qtdCols;j++){
+    //         for(int k=0;k<matriz[i].qtdCols-j-1;k++){
+    //             if(matriz[i].p[k].Coluna > matriz[i].p[k+1].Coluna){
+    //                 aux1 = matriz[i].p[k];
+    //                 matriz[i].p[k] = matriz[i].p[k+1];
+    //                 matriz[i].p[k+1] = aux1;
+    //             }
+    //         }
+    //     }
+    // }
+
+    for(int i=0;i<qtd_linhas;i++){//inicio da impressao
         if(matriz[i].qtdCols > max_colunas){
             max_colunas = matriz[i].qtdCols;
         }
+        if(matriz[i].Linha > max_linha){
+            max_linha = matriz[i].Linha;
+        }
     }
     printf("\n");
-    for(int i=0;i<qtd_linhas;i++){
+
+    for(int i=0;i<max_linha;i++){
+        if(encontraLinha(i, &matriz, qtd_linhas) != -1){
+            printf("%.1f", encontraLinha(i, &matriz, qtd_linhas));
+        }
+        else{
+            printf("0.0");
+        }
         for(int j=0;j<max_colunas;j++){
-            if(j<matriz[i].qtdCols)
-                printf("%.1f ", matriz[i].p[j].Valor);
-            else
-                printf("0.0 ");
+            
         }
         printf("\n");
     }
