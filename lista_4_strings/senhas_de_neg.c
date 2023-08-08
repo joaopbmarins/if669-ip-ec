@@ -9,7 +9,7 @@ int main(){
 
     scanf("%d", &qtd_senhas);
     for(i=0;i<qtd_senhas;i++){// i é qual senha estamos
-       scanf(" %99[^\n]", senha);
+        scanf(" %99[^\n]", senha);
 
         for(j=0;senha[j] != '\0' && j<TAM_senha;j++){// j é qual char estamos
             if((senha[j] >= 'A' && senha[j] <= 'Z') || (senha[j] >= '0' && senha[j] <= '9')){
@@ -50,7 +50,7 @@ int main(){
                 valido = 0;
             }
         }
-        qtd_senha_final +=  (senha);
+        qtd_senha_final += (int) (senha);
         strcat(senha_final, "-");
         strcat(senha_final, senha);
     }
