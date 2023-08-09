@@ -12,7 +12,7 @@ int main(){
     fscanf(arq," %99[^\n]", linha);
     printf("Linha 2: %s\n",linha);
 
-    while (!feof(arq))
+    while (feof(arq) == 0)
     {
         fscanf(arq, " %99[^\n]\n", linha);
         printf("%s\n", linha);
