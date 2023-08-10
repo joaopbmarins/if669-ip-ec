@@ -18,7 +18,7 @@ typedef struct{
     float destino_x, destino_y;
 }Produto;
 
-Caminhao remover_caminhao(Filial *filiais, int codigo_filial){// não vai precisar de realloc?
+Caminhao remover_caminhao(Filial *filiais, int codigo_filial){
     Caminhao ultimo_caminhao, *aux;
     ultimo_caminhao = filiais[codigo_filial].caminhao[filiais[codigo_filial].n_caminhao-1];
     filiais[codigo_filial].caminhao = (Caminhao *) realloc(filiais[codigo_filial].caminhao, (filiais[codigo_filial].n_caminhao-1) * sizeof(Caminhao));
@@ -148,5 +148,5 @@ int main(){
     }
     free(filiais);
 
-        return 0;
+    return 0;
 }
