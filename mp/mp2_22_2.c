@@ -22,7 +22,7 @@ Caminhao remover_caminhao(Filial *filiais, int codigo_filial){
     Caminhao ultimo_caminhao, *aux;
     ultimo_caminhao = filiais[codigo_filial].caminhao[filiais[codigo_filial].n_caminhao-1];
     filiais[codigo_filial].caminhao = (Caminhao *) realloc(filiais[codigo_filial].caminhao, (filiais[codigo_filial].n_caminhao-1) * sizeof(Caminhao));
-    //if(filiais[codigo_filial].caminhao == NULL){printf("Problema de alocacao."); free(aux); exit(1);}
+    if(filiais[codigo_filial].caminhao == NULL && (filiais[codigo_filial].n_caminhao-1) !=0 ){printf("Problema de alocacao."); free(aux); exit(1);}
     filiais[codigo_filial].n_caminhao -= 1;
     printf("Caminhao removido com sucesso.\n");
     return ultimo_caminhao;
