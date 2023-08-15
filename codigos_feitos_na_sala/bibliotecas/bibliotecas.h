@@ -1,0 +1,1 @@
+void mostra(char *frase);
