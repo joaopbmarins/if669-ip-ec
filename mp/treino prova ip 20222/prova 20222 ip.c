@@ -137,5 +137,6 @@ void salvaAlunos(Aluno *alunos, int qtdAlunos){
     fwrite(alunos->qtd_notas, sizeof(int), qtdAlunos, bin);
     fwrite(alunos->notas, sizeof(float) * alunos->qtd_notas, qtdAlunos, bin);
     */
+    
     fclose(bin);
 }
