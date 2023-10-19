@@ -1,0 +1,1 @@
+Nem todos os codigos dessa pasta funcionam.
