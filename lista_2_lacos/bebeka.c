@@ -8,6 +8,7 @@ int main(){
     while ((scanf(" %c %d", &dir, &dist)) != EOF){
         switch (dir){
         case 'd':
+            printf(".");
             for(int i=0;i<posi; i++){
                 printf(" ");
             }
@@ -18,6 +19,7 @@ int main(){
             printf("\n");
             break;
         case 'e':
+            printf(".");
             posi -= dist*2;
             for(int i=0;i<posi; i++){
                 printf(" ");
@@ -29,6 +31,7 @@ int main(){
             break;
         case 'f':
             for(int j=0;j<dist;j++){
+                printf(".");
                 for(int i=0;i<posi; i++){
                     printf(" ");
                 }
@@ -36,6 +39,7 @@ int main(){
             }
             break;
         case 'x':
+            printf(".");
             for(int i=0;i<posi;i++){
                 printf(" ");
             }
